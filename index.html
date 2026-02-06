@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Rose, A Feeling 🌹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #ffccd5, #590d22 70%);
+      background-color: #590d22;
+      overflow: hidden;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    section {
+      z-index: 1;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      transition: all 1.3s cubic-bezier(.77,0,.18,1);
+      padding: 40px;
+      text-align: center;
+    }
+
+    section.active { left: 0; }
+    section.prev { left: -100%; }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      animation: fadeDown 1.4s ease;
+    }
+
+    p {
+      max-width: 720px;
+      font-size: 1.25rem;
+      line-height: 1.9;
+      opacity: 0.95;
+      animation: fadeUp 1.6s ease;
+    }
+
+    .rose {
+      font-size: 9rem;
+      margin: 30px 0;
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(255,77,109,0.8));
+    }
+
+    .heartbeat {
+      animation: heartbeat 1.8s infinite;
+    }
+
+    .btn {
+      margin-top: 34px;
+      padding: 15px 46px;
+      background: linear-gradient(45deg, #ff4d6d, #c9184a);
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+    }
+
+    /* Letter card */
+    .letter {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      padding: 35px 40px;
+      border-radius: 22px;
+      max-width: 760px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      animation: fadeUp 1.8s ease;
+    }
+
+    .type {
+      border-right: 2px solid rgba(255,255,255,0.7);
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 6s steps(60) 1 forwards, blink 0.8s infinite;
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+
+    /* Falling petals */
+    .petal {
+      position: absolute;
+      top: -10%;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, #ffccd5, #ff4d6d);
+      border-radius: 0 50% 50% 50%;
+      opacity: 0.75;
+      animation: fall linear infinite;
+      z-index: 0;
+    }
+
+    /* Navigation dots */
+    .nav {
+      position: fixed;
+      bottom: 28px;
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .dot.active {
+      background: #fff;
+      transform: scale(1.5);
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-22px); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.08); }
+      40% { transform: scale(0.95); }
+      60% { transform: scale(1.1); }
+    }
+
+    @keyframes fall {
+      to { transform: translateY(120vh) rotate(360deg); }
+    }
+
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+  </style>
+</head>
+<body>
+
+  <!-- Page 1 -->
+  <section class="active">
+    <h1>Happy Rose Day 🌹</h1>
+    <p>Some days deserve more than wishes. They deserve feelings.</p>
+    <div class="rose heartbeat">🌹</div>
+    <button class="btn" onclick="goTo(1)">Step Inside</button>
+  </section>
+
+  <!-- Page 2 -->
+  <section>
+    <h1>This Rose</h1>
+    <p>It isn’t perfect because it’s flawless — it’s perfect because it’s meant for you.</p>
+    <div class="rose">🌹</div>
+    <button class="btn" onclick="goTo(2)">Keep Going</button>
+  </section>
+
+  <!-- Page 3 -->
+  <section>
+    <h1>What I Feel</h1>
+    <p>In a world full of seasons, you feel like the one that makes everything bloom.</p>
+    <div class="rose">🌹</div>
+    <button class="btn" onclick="goTo(3)">One Last Thing</button>
+  </section>
+
+  <!-- Page 4 -->
+  <section>
+    <h1>A Quiet Promise ❤️</h1>
+    <div class="letter">
+      <p class="type">No matter how busy life gets, this rose will always remind you — you are cherished, admired, and deeply special.</p>
+    </div>
+    <button class="btn" onclick="alert('🌹 Happy Rose Day — from my heart to yours 🌹')">Send This Rose</button>
+  </section>
+
+  <!-- Navigation -->
+  <div class="nav">
+    <div class="dot active" onclick="goTo(0)"></div>
+    <div class="dot" onclick="goTo(1)"></div>
+    <div class="dot" onclick="goTo(2)"></div>
+    <div class="dot" onclick="goTo(3)"></div>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('section');
+    const dots = document.querySelectorAll('.dot');
+    let current = 0;
+
+    function goTo(index) {
+      pages[current].classList.remove('active');
+      pages[current].classList.add('prev');
+      dots[current].classList.remove('active');
+
+      pages[index].classList.remove('prev');
+      pages[index].classList.add('active');
+      dots[index].classList.add('active');
+
+      current = index;
+    }
+
+    // Falling petals
+    for (let i = 0; i < 36; i++) {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = 6 + Math.random() * 7 + 's';
+      petal.style.animationDelay = Math.random() * 6 + 's';
+      petal.style.transform = `scale(${Math.random() + 0.4})`;
+      document.body.appendChild(petal);
+    }
+  </script>
+
+</body>
+</html>
